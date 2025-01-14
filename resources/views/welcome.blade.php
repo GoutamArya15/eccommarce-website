@@ -17,6 +17,9 @@
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    {{-- toaster css --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">
+    {{-- toaster css --}}
 </head>
 
 <body>
@@ -315,12 +318,12 @@
                     class="col-sm-8 col-lg-2 d-flex gap-5 align-items-center justify-content-center justify-content-sm-end">
                     <ul class="d-flex justify-content-end list-unstyled m-0">
                         <li>
-                            <a href="#" class="p-2 mx-1">
+                            <a href="{{ route('login') }}" class="p-2 mx-1">
                                 <i class="fa-regular fa-user"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="p-2 mx-1">
+                            <a href="#agsasf " class="p-2 mx-1">
                                 <i class="fa-regular fa-heart"></i>
                             </a>
                         </li>
@@ -3235,6 +3238,17 @@
     </script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
+    {{-- toaster css --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    {{-- toaster css --}}
+    <script>
+        @session('success')
+        toastr.options.timeOut = 10000;
+        toastr.success("{{ Session::get('success') }}");
+        @endsession
+    </script>
+
+
 </body>
 
 </html>
