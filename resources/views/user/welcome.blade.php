@@ -1,26 +1,4 @@
-<head>
-    <title>Organic - Grocery Store HTML Website Template</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendor.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    {{-- toaster css --}}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">
-    {{-- toaster css --}}
-</head>
+@include('user.layouts.header')
 
 <body>
     <div class="preloader-wrapper">
@@ -261,14 +239,14 @@
                     </button>
                 </div>
 
-                <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-4">
+                <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-4" style="width: 41.333333%">
                     <div class="search-bar row bg-light p-2 rounded-4">
                         <div class="col-md-4 d-none d-md-block">
                             <select class="form-select border-0 bg-transparent">
-                                <option>All Categories</option>
-                                <option>Groceries</option>
-                                <option>Drinks</option>
-                                <option>Chocolates</option>
+                                <option value="">All Category</option>
+                                @foreach ($category as $item)
+                                    <option>{{ $item['title'] }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-11 col-md-7">
@@ -289,11 +267,16 @@
 
                 <div class="col-lg-4">
                     <ul
-                        class="navbar-nav list-unstyled d-flex flex-row gap-3 gap-lg-5 justify-content-center flex-wrap align-items-center mb-0 fw-bold text-uppercase text-dark">
-                        <li class="nav-item active">
+                        class="navbar-nav list-unstyled d-flex flex-row   flex-wrap align-items-center mb-0 fw-bold text-uppercase text-dark">
+                        <li class="nav-item active"
+                            style="display: flex
+                    ;
+                        justify-content: space-between;
+                        width: 100px;
+                        margin-left: 48px;
+                        gap: 28px;
+                        margin-top: 5px">
                             <a href="index.html" class="nav-link">Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle pe-3" role="button" id="pages"
                                 data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
                             <ul class="dropdown-menu border-0 p-3 rounded-0 shadow" aria-labelledby="pages">
@@ -311,29 +294,33 @@
                                 <li><a href="index.html" class="dropdown-item">404 Error </a></li>
                             </ul>
                         </li>
+                        <li class="nav-item dropdown"
+                            style="    display: flex; margin-left: 190px; margin-top: 11px;">
+                            <ul class="dropdown-menu border-0 p-3 rounded-0 shadow" aria-labelledby="pages">
+                                @guest
+                                    <li><a href="{{ route('login') }}" class="dropdown-item">Login</a></li>
+                                    <li><a href="{{ route('register') }}" class="dropdown-item">Register</a></li>
+                                @endguest
+                                @auth
+                                    <li><a href="{{ route('logout') }}" class="dropdown-item">Logout</a></li>
+                                @endauth
+                            </ul>
+                            <a href="#agsasf " class="p-2 mx-1">
+                                <i class="fa-regular fa-heart"></i>
+                            </a>
+                            <a href="#" class="p-2 mx-1" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </a>
+                            <a class="nav-link dropdown-toggle pe-3" role="button" id="pages"
+                                data-bs-toggle="dropdown" aria-expanded="false"><i
+                                    class="fa-regular fa-user"></i></a>
+                        </li>
                     </ul>
                 </div>
 
                 <div
                     class="col-sm-8 col-lg-2 d-flex gap-5 align-items-center justify-content-center justify-content-sm-end">
-                    <ul class="d-flex justify-content-end list-unstyled m-0">
-                        <li>
-                            <a href="{{ route('login') }}" class="p-2 mx-1">
-                                <i class="fa-regular fa-user"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#agsasf " class="p-2 mx-1">
-                                <i class="fa-regular fa-heart"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="p-2 mx-1" data-bs-toggle="offcanvas"
-                                data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </a>
-                        </li>
-                    </ul>
                 </div>
 
             </div>
@@ -345,8 +332,9 @@
         <div class="container-lg">
             <div class="row">
                 <div class="col-lg-6 pt-5 mt-5">
-                    <h2 class="display-1 ls-1"><span class="fw-bold text-primary">Organic</span> Foods at your <span
-                            class="fw-bold">Doorsteps</span></h2>
+                    {{-- <h2 class="display-1 ls-1"><span class="fw-bold text-primary">Organic</span> Foods at your <span
+                            class="fw-bold">Doorsteps</span></h2> --}}
+                    <h2 class="display-1 ls-1">{!! __('welcome.organic_food_heading') !!}</h2>
                     <p class="fs-4">Dignissim massa diam elementum.</p>
                     <div class="d-flex gap-3">
                         <a href="#"
@@ -446,98 +434,7 @@
         </div>
     </section>
 
-    <section class="py-5 overflow-hidden">
-        <div class="container-lg">
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="section-header d-flex flex-wrap justify-content-between mb-5">
-                        <h2 class="section-title">Category</h2>
-
-                        <div class="d-flex align-items-center">
-                            <a href="#" class="btn btn-primary me-2">View All</a>
-                            <div class="swiper-buttons">
-                                <button class="swiper-prev category-carousel-prev btn btn-yellow">❮</button>
-                                <button class="swiper-next category-carousel-next btn btn-yellow">❯</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="category-carousel swiper">
-                        <div class="swiper-wrapper">
-                            <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{ asset('assets/images/category-thumb-1.jpg') }}" class="rounded-circle"
-                                    alt="Category Thumbnail">
-                                <h4 class="fs-6 mt-3 fw-normal category-title">Fruits & Veges</h4>
-                            </a>
-                            <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{ asset('assets/images/category-thumb-2.jpg') }}" class="rounded-circle"
-                                    alt="Category Thumbnail">
-                                <h4 class="fs-6 mt-3 fw-normal category-title">Breads & Sweets</h4>
-                            </a>
-                            <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{ asset('assets/images/category-thumb-3.jpg') }}" class="rounded-circle"
-                                    alt="Category Thumbnail">
-                                <h4 class="fs-6 mt-3 fw-normal category-title">Fruits & Veges</h4>
-                            </a>
-                            <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{ asset('assets/images/category-thumb-4.jpg') }}" class="rounded-circle"
-                                    alt="Category Thumbnail">
-                                <h4 class="fs-6 mt-3 fw-normal category-title">Beverages</h4>
-                            </a>
-                            <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{ asset('assets/images/category-thumb-5.jpg') }}" class="rounded-circle"
-                                    alt="Category Thumbnail">
-                                <h4 class="fs-6 mt-3 fw-normal category-title">Meat Products</h4>
-                            </a>
-                            <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{ asset('assets/images/category-thumb-6.jpg') }}" class="rounded-circle"
-                                    alt="Category Thumbnail">
-                                <h4 class="fs-6 mt-3 fw-normal category-title">Breads</h4>
-                            </a>
-                            <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{ asset('assets/images/category-thumb-7.jpg') }}" class="rounded-circle"
-                                    alt="Category Thumbnail">
-                                <h4 class="fs-6 mt-3 fw-normal category-title">Fruits & Veges</h4>
-                            </a>
-                            <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{ asset('assets/images/category-thumb-8.jpg') }}" class="rounded-circle"
-                                    alt="Category Thumbnail">
-                                <h4 class="fs-6 mt-3 fw-normal category-title">Breads & Sweets</h4>
-                            </a>
-                            <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{ asset('assets/images/category-thumb-1.jpg') }}" class="rounded-circle"
-                                    alt="Category Thumbnail">
-                                <h4 class="fs-6 mt-3 fw-normal category-title">Fruits & Veges</h4>
-                            </a>
-                            <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{ asset('assets/images/category-thumb-1.jpg') }}" class="rounded-circle"
-                                    alt="Category Thumbnail">
-                                <h4 class="fs-6 mt-3 fw-normal category-title">Beverages</h4>
-                            </a>
-                            <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{ asset('assets/images/category-thumb-1.jpg') }}" class="rounded-circle"
-                                    alt="Category Thumbnail">
-                                <h4 class="fs-6 mt-3 fw-normal category-title">Meat Products</h4>
-                            </a>
-                            <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{ asset('assets/images/category-thumb-1.jpg') }}" class="rounded-circle"
-                                    alt="Category Thumbnail">
-                                <h4 class="fs-6 mt-3 fw-normal category-title">Breads</h4>
-                            </a>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
+    <x-category-component />
 
     <section class="pb-5">
         <div class="container-lg">
@@ -3079,176 +2976,7 @@
         </div>
     </section>
 
-    <footer class="py-5">
-        <div class="container-lg">
-            <div class="row">
-
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer-menu">
-                        <img src="images/logo.svg" width="240" height="70" alt="logo">
-                        <div class="social-links mt-3">
-                            <ul class="d-flex list-unstyled gap-2">
-                                <li>
-                                    <a href="#" class="btn btn-outline-light">
-                                        <svg width="16" height="16">
-                                            <use xlink:href="#facebook"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn btn-outline-light">
-                                        <svg width="16" height="16">
-                                            <use xlink:href="#twitter"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn btn-outline-light">
-                                        <svg width="16" height="16">
-                                            <use xlink:href="#youtube"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn btn-outline-light">
-                                        <svg width="16" height="16">
-                                            <use xlink:href="#instagram"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn btn-outline-light">
-                                        <svg width="16" height="16">
-                                            <use xlink:href="#amazon"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-2 col-sm-6">
-                    <div class="footer-menu">
-                        <h5 class="widget-title">Organic</h5>
-                        <ul class="menu-list list-unstyled">
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">About us</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Conditions </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Our Journals</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Careers</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Affiliate Programme</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Ultras Press</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-6">
-                    <div class="footer-menu">
-                        <h5 class="widget-title">Quick Links</h5>
-                        <ul class="menu-list list-unstyled">
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Offers</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Discount Coupons</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Stores</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Track Order</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Shop</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Info</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-6">
-                    <div class="footer-menu">
-                        <h5 class="widget-title">Customer Service</h5>
-                        <ul class="menu-list list-unstyled">
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">FAQ</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Contact</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Privacy Policy</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Returns & Refunds</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Cookie Guidelines</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Delivery Information</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer-menu">
-                        <h5 class="widget-title">Subscribe Us</h5>
-                        <p>Subscribe to our newsletter to get updates about our grand offers.</p>
-                        <form class="d-flex mt-3 gap-0" action="index.html">
-                            <input class="form-control rounded-start rounded-0 bg-light" type="email"
-                                placeholder="Email Address" aria-label="Email Address">
-                            <button class="btn btn-dark rounded-end rounded-0" type="submit">Subscribe</button>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </footer>
-    <div id="footer-bottom">
-        <div class="container-lg">
-            <div class="row">
-                <div class="col-md-6 copyright">
-                    <p>© 2024 Organic. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 credit-link text-start text-md-end">
-                    <p>HTML Template by <a href="https://templatesjungle.com/">TemplatesJungle</a> Distributed By <a
-                            href="https://themewagon.com">ThemeWagon</a> </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="{{ asset('assets/js/jquery-1.11.0.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
-    <script src="{{ asset('assets/js/plugins.js') }}"></script>
-    <script src="{{ asset('assets/js/script.js') }}"></script>
-    {{-- toaster css --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    {{-- toaster css --}}
-    <script>
-        @session('success')
-        toastr.options.timeOut = 10000;
-        toastr.success("{{ Session::get('success') }}");
-        @endsession
-    </script>
-
-
+    @include('user.layouts.footer')
 </body>
 
 </html>

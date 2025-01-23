@@ -20,11 +20,34 @@
    <!-- <script src="assets/js/Chart.roundedBarCharts.js"></script> -->
    <!-- End custom js for this page-->
 
+
    <script>
-       @session('error')
-       toastr.options.timeOut = 10000;
-       toastr.success("{{ Session::get('error') }}");
-       @endsession
+       toastr.options = {
+           "closeButton": true,
+           "debug": false,
+           "newestOnTop": true,
+           "progressBar": true,
+           "positionClass": "toast-top-right",
+           "preventDuplicates": true,
+           "onclick": null,
+           "showDuration": "300",
+           "hideDuration": "1000",
+           "timeOut": "5000",
+           "extendedTimeOut": "1000",
+           "showEasing": "swing",
+           "hideEasing": "linear",
+           "showMethod": "fadeIn",
+           "hideMethod": "fadeOut"
+       }
+       @if (session('success'))
+           toastr.success("{{ session('success') }}");
+       @elseif (session('error'))
+           toastr.error("{{ session('error') }}");
+       @elseif (session('info'))
+           toastr.info("{{ session('info') }}");
+       @elseif (session('warning'))
+           toastr.warning("{{ session('warning') }}");
+       @endif
    </script>
    </body>
 

@@ -41,6 +41,10 @@
                                 <button type="button" class="btn btn-block btn-facebook auth-form-btn">
                                     <i class="ti-facebook me-2"></i>Connect using facebook </button>
                             </div>
+                            <div class="mb-2 d-grid gap-2">
+                                <a href="{{ route('google.login') }}" class="btn btn-block btn-google auth-form-btn">
+                                    <i class="ti-google me-2"></i>Connect using Google </a>
+                            </div>
                             <div class="text-center mt-4 font-weight-light"> Don't have an account? <a
                                     href="{{ route('register') }}" class="text-primary">Create</a>
                             </div>
@@ -54,11 +58,3 @@
     <!-- page-body-wrapper ends -->
 </div>
 @include('admin.includes.footer')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-{{-- {{ dd(session()->all()) }} --}}
-<script>
-    @session('error')
-    toastr.options.timeOut = 10000;
-    toastr.error("{{ Session::get('error') }}");
-    @endsession
-</script>

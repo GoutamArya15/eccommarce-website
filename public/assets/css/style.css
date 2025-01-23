@@ -597,3 +597,6 @@ body {
       }
   }
   /* ============ mobile view .end// ============ */
+  svg {
+    margin-top: 8px;
+}
