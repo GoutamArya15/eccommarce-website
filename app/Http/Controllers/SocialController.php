@@ -9,17 +9,16 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialController extends Controller
 {
-    public function redirect_google()
+    public function redirect($provider)
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
-
-    public function loginGoogle()
+    public function socilLogin($provider)
     {
         try {
             // Get the authenticated Google user
-            $googleUser = Socialite::driver('google')->user();
+            $googleUser = Socialite::driver($provider)->user();
             $user = User::firstOrCreate(
                 ['email' => $googleUser->getEmail()],
                 [
@@ -28,10 +27,8 @@ class SocialController extends Controller
                 ]
             );
             Auth::login($user);
-
             return redirect()->route('home')->with('success', 'Successs full login');
         } catch (\Exception $e) {
-            // Handle any errors that may occur during the login process
             return redirect()->route('login')->with('error', 'Failed to login with Google. Please try again.');
         }
         return redirect()->route('home');
