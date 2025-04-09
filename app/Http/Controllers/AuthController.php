@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+
+
+    public function register()
+    {
+        return view('auth.register');
+    }
+
+    public function login()
+    {
+        return view('auth.login');
+    }
     public function login_process(Request $request)
     {
         $request->validate([
@@ -43,6 +54,7 @@ class AuthController extends Controller
         ]);
 
         if ($user) {
+            Auth::login($user);
             return redirect()->route('home')->with('success', 'Successfull register');
         } else {
             return redirect()->route('register')->with('error', 'Some thing went wrong !');
@@ -56,7 +68,7 @@ class AuthController extends Controller
             return back()->with('error', 'something went wrong');
         } else {
             Auth::logout($user);
-            return redirect()->route('home')->with('success','Logout Successfull');
+            return redirect()->route('home')->with('success', 'Logout Successfull');
         }
     }
 }

@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section-header d-flex flex-wrap justify-content-between mb-5">
-                    <h2 class="section-title">Category</h2>
+                    <h2 class="section-title">{!! __('welcome.Category') !!}</h2>
                     <div class="d-flex align-items-center">
-                        <a href="#" class="btn btn-primary me-2">View All</a>
+                        <a href="#" class="btn btn-primary me-2">{!! __('welcome.ViewAll') !!}</a>
                         <div class="swiper-buttons">
                             <button class="swiper-prev category-carousel-prev btn btn-yellow">❮</button>
                             <button class="swiper-next category-carousel-next btn btn-yellow">❯</button>
@@ -20,8 +20,8 @@
                     <div class="swiper-wrapper">
                         @foreach ($category as $item)
                             <a href="category.html" class="nav-link swiper-slide text-center">
-                                <img src="{{asset('assets/uploads/categoryImage/'.$item['image_name'])}}" class="rounded-circle"
-                                    alt="Category Thumbnail">
+                                <img src="{{ asset('assets/uploads/categoryImage/' . $item['image_name']) }}"
+                                    class="rounded-circle" alt="Category Thumbnail">
                                 <h4 class="fs-6 mt-3 fw-normal category-title">{{ $item['title'] }}</h4>
                             </a>
                         @endforeach

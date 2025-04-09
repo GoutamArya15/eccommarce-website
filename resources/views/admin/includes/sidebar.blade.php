@@ -17,25 +17,24 @@
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
                 aria-controls="form-elements">
                 <i class="icon-columns menu-icon"></i>
-                <span class="menu-title">Form elements</span>
+                <span class="menu-title">Product</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Basic
-                            Elements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('product-page') }}">Product</a></li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-                <i class="icon-bar-graph menu-icon"></i>
-                <span class="menu-title">Charts</span>
+                <i class="icon-head menu-icon"></i>
+                <span class="menu-title">User</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="charts">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('admin.users') }}">User</a>
                     </li>
                 </ul>
             </div>
@@ -43,13 +42,13 @@
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
                 <i class="icon-grid-2 menu-icon"></i>
-                <span class="menu-title">Tables</span>
+                <span class="menu-title">Setting</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic
-                            table</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('admin_setting') }}">Admin Setting</a>
+                    </li>
                 </ul>
             </div>
         </li>

@@ -22,10 +22,55 @@
     <link rel="shortcut icon" href="{{ asset('assets/admin/images/favicon.png') }}" />
     {{-- toaster css --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     {{-- toaster css --}}
+    <style>
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #444;
+            line-height: 14px;
+        }
+
+        textarea.select2-search__field {
+            padding-bottom: 20px !important;
+            !i;
+            !;
+            padding-top: 6px !important;
+            !i;
+            !;
+            padding-left: 3px !important;
+            !i;
+            !;
+        }
+
+        li.select2-selection__choice {
+            padding-left: 24px !important;
+            !i;
+            !;
+            padding-top: 8px !important;
+            !i;
+            !;
+        }
+
+
+        .select2-selection__choice__remove {
+            color: white !important;
+            font-weight: 700;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            line-height: 24px !important;
+        }
+
+        .select2-selection__choice__display {
+            color: white !important;
+            !i;
+            !;
+        }
+    </style>
 </head>
 
 <body>

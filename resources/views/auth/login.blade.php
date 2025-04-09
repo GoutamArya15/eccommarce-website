@@ -38,11 +38,13 @@
                                 <a href="#" class="auth-link text-black">Forgot password?</a>
                             </div>
                             <div class="mb-2 d-grid gap-2">
-                                <button type="button" class="btn btn-block btn-facebook auth-form-btn">
-                                    <i class="ti-facebook me-2"></i>Connect using facebook </button>
+                                <a href="{{ route('redirecttoSocial', 'facebook') }}"
+                                    class="btn btn-block btn-facebook auth-form-btn">
+                                    <i class="ti-facebook me-2"></i>Connect using facebook </a>
                             </div>
                             <div class="mb-2 d-grid gap-2">
-                                <a href="{{ route('google.login') }}" class="btn btn-block btn-google auth-form-btn">
+                                <a href="{{ route('redirecttoSocial', 'google') }}"
+                                    class="btn btn-block btn-google auth-form-btn">
                                     <i class="ti-google me-2"></i>Connect using Google </a>
                             </div>
                             <div class="text-center mt-4 font-weight-light"> Don't have an account? <a
