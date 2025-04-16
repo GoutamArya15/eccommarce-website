@@ -2609,5 +2609,4 @@ style="background-image: url({{ asset('assets/images/banner-1.jpg') }});backgrou
         </div>
     </div>
 </footer>
-
 @endsection

@@ -97,25 +97,25 @@
 @endsection
 
 @section('inside_section')
-<style>
-    svg{
-        height: 50px;
-    }
-</style>
+    <style>
+        svg {
+            height: 50px;
+        }
+    </style>
     <div class="container mt-5" style="height: 700px">
         <div class="row">
             <div class="col-md-2" style="height: 700px;margin-top:50px;">
                 <h5 style="margin-left: 20px;">Category</h5>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                        style="border: 1px solid">
+                    <input class="form-check-input checkbox_cat" type="checkbox" value="1" id="flexCheckDefault"
+                        style="border: 1px solid" name="category[]">
                     <label class="form-check-label" for="flexCheckDefault">
                         Vegitable
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked
-                        style="border: 1px solid">
+                    <input class="form-check-input checkbox_cat" type="checkbox" value="2" id="flexCheckChecked"
+                        style="border: 1px solid" name="category[]">
                     <label class="form-check-label" for="flexCheckChecked">
                         Fruits
                     </label>
@@ -141,65 +141,19 @@
                 <div class="row">
                     {{-- {{dd($products->toArray()['data'])}} --}}
                     @foreach ($products->toArray()['data'] as $value)
-
                         <div class="col-md-4">
                             <div class="product-item">
                                 <figure>
                                     <a href="index.html" title="Product Title">
-                                        <img src="http://127.0.0.1:8000/assets/uploads/products/{{$value['details']['product_image']}}"
+                                        <img src="http://127.0.0.1:8000/assets/uploads/products/{{ $value['details']['product_image'] }}"
                                             alt="Product Thumbnail" class="tab-image">
                                     </a>
                                 </figure>
                                 <div class="d-flex flex-column text-center">
-                                    <h3 class="fs-6 fw-normal">{{$value['product_name']}}</h3>
-                                    <div>
-                                        <span class="rating">
-                                            <svg width="18" height="18" class="text-warning">
-                                                <use xlink:href="#star-full"></use>
-                                            </svg>
-                                            <svg width="18" height="18" class="text-warning">
-                                                <use xlink:href="#star-full"></use>
-                                            </svg>
-                                            <svg width="18" height="18" class="text-warning">
-                                                <use xlink:href="#star-full"></use>
-                                            </svg>
-                                            <svg width="18" height="18" class="text-warning">
-                                                <use xlink:href="#star-full"></use>
-                                            </svg>
-                                            <svg width="18" height="18" class="text-warning">
-                                                <use xlink:href="#star-half"></use>
-                                            </svg>
-                                        </span>
-                                        {{-- <span>(222)</span> --}}
-                                    </div>
-                                    <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <del>$24.00</del>
-                                        <span class="text-dark fw-semibold">${{$value['details']['product_price']}}</span>
-                                        <span
-                                            class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10%
-                                            OFF</span>
-                                    </div>
-                                    <form action="http://127.0.0.1:8000/cart-add" method="post">
-                                        <input type="hidden" name="_token"
-                                            value="nPIniEjLeztzdkukBNpKyf5uKAIT5ny2XXOlCTw2" autocomplete="off">
-                                        <div class="button-area p-3 pt-0">
-                                            <div class="row g-1 mt-2">
-                                                <div class="col-3"><input type="number" name="product_quantity"
-                                                        class="form-control border-dark-subtle input-number quantity"
-                                                        value="1"></div>
-                                                <div class="col-7"><button type="submit"
-                                                        class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><svg
-                                                            width="18" height="18">
-                                                            <use xlink:href="#cart"></use>
-                                                        </svg>Add to Cart</button></div>
-                                                <div class="col-2"><a href="#"
-                                                        class="btn btn-outline-dark rounded-1 p-2 fs-6"><svg
-                                                            width="18" height="18">
-                                                            <use xlink:href="#heart"></use>
-                                                        </svg></a></div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    <h3 class="fs-6 fw-normal">{{ $value['product_name'] }}</h3>
+                                </div>
+                                <div class="d-flex flex-column text-center">
+                                    <button class="btn btn-success text-white">See</button>
                                 </div>
                             </div>
                         </div>
@@ -210,4 +164,37 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('script')
+    <script>
+        let array = [];
+        $(".checkbox_cat").on("change", function() {
+            if (this.checked) {
+                this.setAttribute('checked', 'checked');
+                array.push($(this).val());
+                category_filter();
+            } else {
+                this.removeAttribute('checked');
+                array = array.filter(function(item) {
+                    return item !== $(this).val();
+                }.bind(this));
+                // console.log(array);
+            }
+        });
+
+        function category_filter() {
+            $.ajax({
+                type: "get",
+                url: "{{ route('shop.filter') }}",
+                data: {
+                    category: array
+                },
+                success: function(response) {
+                    alert("successfully 🌹");
+                }
+            });
+        }
+    </script>
 @endsection

@@ -19,9 +19,16 @@ class HomepageController extends Controller
         return view('user.welcome', compact('category', 'products', 'cart'));
     }
 
-    public function show_shop(){
+
+    // shoping page
+    public function show_shop()
+    {
         $products = Product::with('details')->paginate(2);
-    // dd($products);
-        return view('user.shop.index',compact('products'));
+        return view('user.shop.index', compact('products'));
+    }
+
+    public function filter_product(Request $request)
+    {
+        print_r($request->all());
     }
 }

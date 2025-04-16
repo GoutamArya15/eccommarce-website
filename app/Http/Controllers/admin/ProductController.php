@@ -125,3 +125,4 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Product deleted successfully');
     }
 }
+//SELECT `product_id`,`category_id` FROM `category_product` WHERE `category_id` = 2;

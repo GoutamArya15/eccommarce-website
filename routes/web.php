@@ -20,6 +20,8 @@ Route::middleware(['setlocale'])->group(function () {
         return redirect()->back();
     })->name('change.language');
     Route::get('/shoping',[HomepageController::class,'show_shop'])->name('shop.show');
+    Route::get('/shoping-filter',[HomepageController::class,'filter_product'])->name('shop.filter');
+
 });
 
 Route::middleware('auth')->group(function () {
